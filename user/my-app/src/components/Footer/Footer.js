@@ -4,8 +4,35 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebook, faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 import {faEnvelope, faPhone, faHome} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import RestGetClient from "../../RestAPI/RestGetClient";
+import AppUrl from "../../RestAPI/AppUrl";
 
 class Footer extends Component {
+
+    constructor() {
+        super();
+        this.state={
+            fAddress:"",
+            fMail:" ",
+            fMobile:" ",
+            fFB:" ",
+            fLin:" ",
+            fGit:"",
+            fYt:" ",
+            fCredit:" "
+        }
+    }
+
+    componentDidMount() {
+        let err = "Opps! Something Went Wrong....!";
+        RestGetClient.GetRequest(AppUrl.Footer).then(result=>{
+            this.setState({fAddress:  result[0]['footer_address'] ,fMail: result[0]['footer_email'] ,fMobile: result[0]['footer_mobile'] ,fFB: result[0]['footer_fb_link'] ,fLin:  result[0]['footer_lin_link'] ,fGit: result[0]['footer_ghub_link'] ,fYt: result[0]['footer_youtube_link'] ,fCredit: result[0]['footer_credit'] });
+        }).catch(error=>{
+            this.setState({fAddress: err ,fMail:err,fMobile:err,fFB:err,fLin:err,fGit:err,fYt: err ,fCredit:err });
+
+        })
+    }
+
     render() {
         return (
             <Fragment>
@@ -20,9 +47,9 @@ class Footer extends Component {
 
                         <Col lg={3} md={6} sm={12} className="p-3 text-justify " >
                             <h1 className="footerMainTitle" >Address</h1>
-                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faHome} /> 177 Tejkuni Para, Tejgaon. Dhaka-1215</p>
-                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faEnvelope} /> hasibolislamnirob@gmail.com</p>
-                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faPhone} /> +8801819979441</p>
+                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faHome} /> {this.state.fAddress} </p>
+                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faEnvelope} /> {this.state.fMail}</p>
+                            <p className="footerAddressDesc" ><FontAwesomeIcon icon={faPhone} /> {this.state.fMobile}</p>
                         </Col>
 
                         <Col lg={3} md={6} sm={12} className="p-3 text-justify " >
@@ -44,7 +71,7 @@ class Footer extends Component {
                 <Container fluid={true} className="text-center" >
                     <Row className="bg-dark" >
                         <Col lg={12} md={12} sm={12} >
-                            <p className="copyRightTitle" > &copy; All Reserved 2021 </p>
+                            <p className="copyRightTitle" > {this.state.fCredit} </p>
                         </Col>
                     </Row>
                 </Container>

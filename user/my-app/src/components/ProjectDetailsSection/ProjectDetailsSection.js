@@ -1,8 +1,40 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Col, Container, Row} from "react-bootstrap";
-import projectImg from "../../asset/images/projectImg.jpg";
 import {Link} from "react-router-dom";
+import RestGetClient from "../../RestAPI/RestGetClient";
+import AppUrl from "../../RestAPI/AppUrl";
+import ReactHtmlParser from "react-html-parser";
+
 class ProjectDetailsSection extends Component {
+
+    constructor(props) {
+        super();
+        this.state={
+            myProjectID:props.id,
+            project_font_img : "",
+            project_big_img : "",
+            project_name : "",
+            project_short_description : "",
+            project_features : "",
+            project_live_preview : ""
+        }
+    }
+
+    componentDidMount() {
+        let id = this.state.myProjectID;
+        RestGetClient.GetRequest(AppUrl.ProjectDetails + id).then(result=>{
+            this.setState({
+                project_name:result[0]['project_name'],
+                project_short_description:result[0]['project_short_description'],
+                project_big_img:result[0]['project_big_img'],
+                project_features:result[0]['project_features'],
+                project_live_preview:result[0]['project_live_preview']
+            })
+        }).catch(error=>{
+
+        })
+    }
+
     render() {
         return (
             <Fragment>
@@ -10,20 +42,19 @@ class ProjectDetailsSection extends Component {
                     <Row>
 
                         <Col lg={6} md={6} sm={12} >
-                            <img className="projectDetailsIMG" src={projectImg} />
+                            <img className="projectDetailsIMG" src={this.state.project_big_img} />
                         </Col>
 
                         <Col lg={6} md={6} sm={12} >
-                            <h1 className="projectDetailsTitle" >Project Name</h1>
-                            <h4 className="projectDetailsSubTitle" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</h4>
+                            <h1 className="projectDetailsTitle" >{this.state.project_name}</h1>
+                            <h4 className="projectDetailsSubTitle" > { ReactHtmlParser(this.state.project_short_description)}</h4>
 
                             <ul>
-                                <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+                                <li className="projectDetailsDec" > { ReactHtmlParser(this.state.project_features)} </li>
+
                             </ul><br/>
 
-                            <Button> <Link className="linkButton" to=" " > Live Preview </Link> </Button>
+                            <Button> <Link className="linkButton" to={this.state.project_live_preview} > Live Preview </Link> </Button>
 
                         </Col>
 

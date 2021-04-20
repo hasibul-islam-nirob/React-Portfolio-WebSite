@@ -9,12 +9,20 @@ class CourseDetailsPage extends Component {
         window.scroll(0,0);
     }
 
+    constructor({match}) {
+        super();
+        this.state={
+            myCourseID:match.params.courseID,
+            courseName:match.params.courseName
+        }
+    }
+
     render() {
         return (
             <Fragment>
                 <TopNavigation title="Course Details" />
-                <PageTopSection pageTopTitle="Course Details" />
-                <CourseDetailsSection/>
+                <PageTopSection pageTopTitle={this.state.courseName} />
+                <CourseDetailsSection id={this.state.myCourseID} />
                 <Footer/>
             </Fragment>
         );

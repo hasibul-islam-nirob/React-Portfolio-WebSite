@@ -9,12 +9,20 @@ class ProjectDetailsPage extends Component {
         window.scroll(0,0);
     }
 
+    constructor({match}) {
+        super();
+        this.state={
+            matchProjectID:match.params.projectID,
+            projectName:match.params.projectName
+        }
+    }
+
     render() {
         return (
             <Fragment>
                 <TopNavigation title="Project Details" />
-                <PageTopSection pageTopTitle="Project Details" />
-                <ProjectDetailsSection/>
+                <PageTopSection pageTopTitle={this.state.projectName} />
+                <ProjectDetailsSection id={this.state.matchProjectID} />
                 <Footer/>
             </Fragment>
         );

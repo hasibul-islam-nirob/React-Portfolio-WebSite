@@ -38,24 +38,26 @@ class TopNavigation extends Component {
         return (
             <Fragment>
                 <title>{this.state.pageTitle}</title>
-                <Navbar variant={this.state.navVariant} className={this.state.navBgColor} fixed="top" collapseOnSelect expand="lg" >
-                    <Link to="/">
-                        <Navbar.Brand className={this.state.navBarTitle}> <img src={this.state.myBrandLogo} /> Nirob</Navbar.Brand>
-                    </Link>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                        </Nav>
-                        <Nav  >
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/">Home</NavLink> </Nav.Link>
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/service">Services</NavLink> </Nav.Link>
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/course">Courses</NavLink> </Nav.Link>
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/portfolio">Portfolio</NavLink> </Nav.Link>
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/contact">Contact</NavLink> </Nav.Link>
-                            <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/about">About</NavLink> </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
+                <div className="menuBarSection" >
+                    <Navbar variant={this.state.navVariant} className={this.state.navBgColor} fixed="top" collapseOnSelect expand="lg" >
+                        <Link to="/">
+                            <Navbar.Brand className={this.state.navBarTitle}> <img src={this.state.myBrandLogo} /> Nirob</Navbar.Brand>
+                        </Link>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="mr-auto">
+                            </Nav>
+                            <Nav  >
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/">Home</NavLink> </Nav.Link>
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/service">Services</NavLink> </Nav.Link>
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/course">Courses</NavLink> </Nav.Link>
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/portfolio">Portfolio</NavLink> </Nav.Link>
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/contact">Contact</NavLink> </Nav.Link>
+                                <Nav.Link> <NavLink exact activeStyle={{color:'#00a8ee'}} className={this.state.navItems} to="/about">About</NavLink> </Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
+                </div>
             </Fragment>
         );
     }

@@ -1,36 +1,45 @@
 import React, {Component, Fragment} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
-import webLogo from "../../asset/images/web.svg";
-import mobileLogo from "../../asset/images/mobile.svg";
-import graphicsLogo from "../../asset/images/graphics.svg";
+import RestGetClient from "../../RestAPI/RestGetClient";
+import AppUrl from "../../RestAPI/AppUrl";
 
 class AllServices extends Component {
+
+    constructor() {
+        super();
+        this.state={
+            myData:[]
+        }
+    }
+
+    componentDidMount() {
+        RestGetClient.GetRequest(AppUrl.Services).then(result=>{
+            this.setState({myData:result});
+        })
+    }
+
     render() {
+
+        const myList = this.state.myData;
+        const myViews = myList.map(myListData=>{
+            return <Col lg={4} md={6} sm={12}  >
+                <div className="serviceCard text-center" >
+                    <img src={myListData.service_img} />
+                    <h2 className="serviceName" > {myListData.service_title} </h2>
+                    <p className="serviceDescription" >{myListData.service_description}</p>
+                </div>
+            </Col>
+        });
+
+
+
+
+
         return (
             <Fragment>
                 <Container className=" allServicesSection text-center" >
                     <Row>
-                        <Col lg={4} md={6} sm={12}  >
-                            <div className="serviceCard text-center" >
-                                <img src={webLogo} />
-                                <h2 className="serviceName" > Web Development </h2>
-                                <p className="serviceDescription" >I design and develop static and dynamic web site as per you requierments as we belive "Web is world's next home".</p>
-                            </div>
-                        </Col>
-                        <Col lg={4} md={6} sm={12} >
-                            <div className="serviceCard text-center" >
-                                <img src={mobileLogo} />
-                                <h2 className="serviceName" >Apps Development </h2>
-                                <p className="serviceDescription" >I build native and cross platfrom mobile app for your business and instiution as per you requierments.</p>
-                            </div>
-                        </Col>
-                        <Col lg={4} md={6} sm={12} >
-                            <div className="serviceCard text-center" >
-                                <img src={graphicsLogo} />
-                                <h2 className="serviceName" > Graphics Designer </h2>
-                                <p className="serviceDescription" >I design morden user interface and other graphics components for your business and instiution.</p>
-                            </div>
-                        </Col>
+                        {myViews}
                     </Row>
                 </Container>
             </Fragment>

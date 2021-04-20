@@ -4,14 +4,24 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlayCircle} from "@fortawesome/free-solid-svg-icons";
 import "video-react/dist/video-react.css";
 import {Player, BigPlayButton } from 'video-react';
-
+import RestGetClient from "../../RestAPI/RestGetClient";
+import AppUrl from "../../RestAPI/AppUrl";
+import ReactHtmlParser from 'react-html-parser';
 class Video extends Component {
 
     constructor() {
         super();
         this.state={
-            show:false
+            show:false,
+            videoDes:" ",
+            videoUrl:" "
         }
+    }
+
+    componentDidMount() {
+        RestGetClient.GetRequest(AppUrl.HomeVideo).then(result=>{
+            this.setState({ videoDes:result[0]['homePage_video_description'], videoUrl:result[0]['homePage_video_url']});
+        })
     }
 
     modalShow=()=>{ this.setState({show:true}); }
@@ -25,9 +35,9 @@ class Video extends Component {
                         <Col lg={12} md={12} sm={12} className="videoSectionCard" >
                             <div>
                                 <h2 className="videoTitle" >How I Do</h2>
-                                <p className="videoDesc" >First i analysis the requirement of project. According to the requirement i make a proper technical analysis, then i build a software architecture. According to
-                                    the planning i start coding. Testing is also going on with coding. Final testing take place after finishing coding part. After successful implementation i provide
-                                    6 month free bug fixing service for corresponding project.</p>
+                                <p className="videoDesc" >
+                                    { ReactHtmlParser(this.state.videoDes)}
+                                </p>
                                 <p> <FontAwesomeIcon onClick={this.modalShow} icon={faPlayCircle} className="videoPlayerCycle" /> </p>
                             </div>
                         </Col>
@@ -37,7 +47,7 @@ class Video extends Component {
                     <Modal size="lg" show={this.state.show} onHide={this.modalHide}>
                         <Modal.Body>
                             <Player>
-                                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                                <source src={this.state.videoUrl} />
                                 <BigPlayButton position="center" />
                             </Player>
                         </Modal.Body>

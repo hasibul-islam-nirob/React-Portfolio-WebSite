@@ -28,8 +28,8 @@ class AppRoute extends Component {
                     <Route exact path="/refund" component={RefundPage} />
                     <Route exact path="/termsCondition" component={TermsConditionPage} />
                     <Route exact path="/privacyPolicy" component={PrivacyPolicyPage} />
-                    <Route exact path="/projectDetails" component={ProjectDetailsPage} />
-                    <Route exact path="/courseDetails" component={CourseDetailsPage} />
+                    <Route exact path="/projectDetails/:projectID/:projectName" component={ProjectDetailsPage} />
+                    <Route exact path="/courseDetails/:courseID/:courseName" component={CourseDetailsPage} />
                     <Route  component={NotFoundPage} />
                 </Switch>
 

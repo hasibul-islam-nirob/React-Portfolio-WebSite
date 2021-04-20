@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import TopNavigation from "../components/TopNavigation/TopNavigation";
 import PageTopSection from "../components/PageTopSection/PageTopSection";
-import AllServices from "../components/AllServices/AllServices";
 import ContactForm from "../components/ContactForm/ContactForm";
 import Footer from "../components/Footer/Footer";
+import Services from "../components/Services/Services";
 
 class ServicesPage extends Component {
     componentDidMount() {
@@ -14,7 +14,7 @@ class ServicesPage extends Component {
             <Fragment>
                 <TopNavigation title="Services" />
                 <PageTopSection pageTopTitle="My Services" />
-                <AllServices/>
+                <Services/>
                 <ContactForm/>
                 <Footer/>
             </Fragment>

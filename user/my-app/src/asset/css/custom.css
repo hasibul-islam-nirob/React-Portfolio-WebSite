@@ -13,6 +13,7 @@ For All Link Button
 Top Banner Part
  */
 
+
 .allBgColor{
     background-color: #e9e7e7;
 }
@@ -97,6 +98,7 @@ Navigation or Menu Part
     -o-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
     background-color: rgba(00, 00, 00, 0.1) !important;
+    height: 65px;
 }
 .navBarBgScroll{
     -webkit-transition: background-color 400ms linear;
@@ -105,6 +107,7 @@ Navigation or Menu Part
     transition: background-color 400ms linear;
     background-color: #ffffff !important;
     box-shadow: 0 0 10px 0 rgba(0, 115, 230, 0.5);
+    height: 65px;
 }
 
 .navTitleScroll{
@@ -242,7 +245,9 @@ Courses Part
 }
 .coursesSectionImg {
     width: 100%;
+    height: 185px;
     border: none;
+    padding-top: 5px;
 }
 .coursesSectionTitle{
     font-family: 'montserreat',sans-serif;
@@ -406,10 +411,10 @@ All Course Section
     margin-top: 5rem;
 }
 .allCourseCardPage{
+    padding: 5px;
 }
 .allCourseCardPage:hover{
-    box-shadow: 0 0 5px 0 rgba(0, 115, 230, 0.2);
-    padding: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 115, 230, 0.2);
 }
 
 

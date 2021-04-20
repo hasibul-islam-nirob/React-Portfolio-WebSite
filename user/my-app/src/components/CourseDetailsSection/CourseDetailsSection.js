@@ -3,56 +3,74 @@ import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 import projectImg from "../../asset/images/projectImg.jpg";
 import {Link} from "react-router-dom";
 import {BigPlayButton, Player} from "video-react";
+import RestGetClient from "../../RestAPI/RestGetClient";
+import AppUrl from "../../RestAPI/AppUrl";
+import ReactHtmlParser from "react-html-parser";
 
 class CourseDetailsSection extends Component {
+
+
+    constructor(props) {
+        super();
+        this.state={
+            courseID:props.id,
+            sort_title      :" ",
+            sort_des        :" ",
+            small_img       :" ",
+            long_title      :" ",
+            long_des        :" ",
+            get_knowlage    :" ",
+            video_link      :" ",
+            course_link     :" "
+        }
+    }
+
+    componentDidMount() {
+        let id = this.state.courseID;
+        RestGetClient.GetRequest(AppUrl.CourseDetails + id).then(result=>{
+            this.setState({
+                sort_title: result[0]['sort_title'],
+                sort_des: result[0]['sort_des'],
+                small_img: result[0]['small_img'],
+                long_title: result[0]['long_title'],
+                long_des: result[0]['long_des'],
+                get_knowlage: result[0]['get_knowlage'],
+                video_link: result[0]['video_link'],
+                course_link: result[0]['course_link']
+            })
+        }).catch(error=>{
+
+        })
+    }
+
+
     render() {
         return (
             <Fragment>
                 <Container className="projectDetailsSection text-justify" >
-                    <h1 className="courseDetailsCourseName" >Course Name</h1>
+                    <h1 className="courseDetailsCourseName" >{ ReactHtmlParser(this.state.sort_title)}</h1>
+                    <h1 className="courseDetailsCourseName" >{ ReactHtmlParser(this.state.long_title)}</h1>
                     <Row>
                         <Col lg={12} md={12} sm={12} >
-                            <p className="courseDetailsTopText" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+                            <p className="courseDetailsTopText" > {this.state.long_des} </p>
                         </Col>
 
                         <Col lg={6} md={6} sm={12} >
                             <h1 className="courseDetailsOutLineTitle" >Course Out Line</h1>
-                            <h4 className="projectDetailsSubTitle" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</h4>
+                            <h4 className="projectDetailsSubTitle" > { ReactHtmlParser(this.state.sort_des)} </h4>
 
-                           <div>
-                               <h1 className="courseDetailsTitle" >Lesson 1</h1>
+                           <div className="text-justify" >
                                <ul>
-                                   <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                   <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                   <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+                                   { ReactHtmlParser(this.state.get_knowlage)}
                                </ul><br/>
                            </div>
 
-                            <div>
-                                <h1 className="courseDetailsTitle" >Lesson 2</h1>
-                                <ul>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                </ul><br/>
-                            </div>
-
-                            <div>
-                                <h1 className="courseDetailsTitle" >Lesson 3</h1>
-                                <ul>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                    <li className="projectDetailsDec" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-                                </ul><br/>
-                            </div>
-
-
-                            <Button> <Link className="linkButton" to=" " >Enroll Now </Link> </Button>
+                            <Button> <Link className="linkButton" to={"/"+this.state.course_link} >Enroll Now </Link> </Button>
                         </Col>
 
                         <Col lg={6} md={6} sm={12} >
                             <Player>
-                                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                                <source src= {this.state.video_link} />
                                 <BigPlayButton position="center" />
                             </Player>
                         </Col>
