@@ -9,27 +9,45 @@ import Courses from "../components/Courses/Courses";
 import Video from "../components/Video/Video";
 import ClientReview from "../components/ClientReview/ClientReview";
 import Footer from "../components/Footer/Footer";
+import Loading from "../components/Loading/Loading";
 
 
 class HomePage extends Component {
+    constructor() {
+        super();
+        this.state={
+            loading:true
+        }
+    }
+
     componentDidMount() {
         window.scroll(0,0);
+        this.setState({loading:false})
     }
     render() {
-        return (
-            <Fragment>
-                <TopNavigation title="Home" />
-                <TopBanner/>
-                <Services/>
-                <Analysis/>
-                <Summary/>
-                <RecentProject/>
-                <Courses/>
-                <Video/>
-                <ClientReview/>
-                <Footer/>
-            </Fragment>
-        );
+
+        if (this.state.loading==true){
+            return <Loading/>
+        }else if(this.state.loading==false){
+
+            return (
+                <Fragment>
+                    <TopNavigation title="Home" />
+                    <TopBanner/>
+                    <Services/>
+                    <Analysis/>
+                    <Summary/>
+                    <RecentProject/>
+                    <Courses/>
+                    <Video/>
+                    <ClientReview/>
+                    <Footer/>
+                </Fragment>
+            );
+
+        }
+
+
     }
 }
 

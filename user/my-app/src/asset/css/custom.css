@@ -1,3 +1,28 @@
+
+.LoadingSVG{
+    width: 80px;
+    height: 80px;
+}
+.errorIcon{
+    color: #f54444;
+    font-weight: 600 !important;
+    font-family: 'montserreat',sans-serif;
+    font-size: 14px;
+}
+
+.wentWrong{
+
+}
+
+.wentWrongH2 {
+    color: #f54444;
+    font-size: 25px;
+}
+
+.wentWrongImg {
+    width: 35px;
+    margin: 10px;
+}
 /*
 For All Link Button
  */

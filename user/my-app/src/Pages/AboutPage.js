@@ -5,6 +5,7 @@ import AboutPageInformation from "../components/AboutPageInformation/AboutPageIn
 import Footer from "../components/Footer/Footer";
 
 
+
 class AboutPage extends Component {
     componentDidMount() {
         window.scroll(0,0);
