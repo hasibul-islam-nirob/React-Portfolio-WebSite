@@ -6,24 +6,34 @@ import RestGetClient from "../../RestAPI/RestGetClient";
 import AppUrl from "../../RestAPI/AppUrl";
 import Loading from "../Loading/Loading";
 import WentWrong from "../WentWrong/WentWrong";
+import Toaster from "../Toaster/Toaster";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 class ContactForm extends Component {
-    constructor() {
-        super();
+
+    constructor(props) {
+        super(props);
         this.state={
             fAddress:"",
             fMail:" ",
             fMobile:" ",
-
-            name:"",
-            email:"",
-            msg:"",
+            buttonName:"Send",
+            nameEr:"",
+            emailEr:"",
+            msgEr:"",
             loading:true,
-            error:false
+            error:false,
+
+            errorIconName:"contactError d-none",
+            errorIconEmail:"contactError d-none",
         }
-    }
+    };
 
     componentDidMount() {
+
         RestGetClient.GetRequest(AppUrl.Footer).then(result=>{
             if (result==null){
                 this.setState({error:true, loading:false})
@@ -42,20 +52,55 @@ class ContactForm extends Component {
     }
 
 
-    onFormControlSubmit(){
-        let name  = document.getElementById("name").value;
-        let email  = document.getElementById("email").value;
-        let msg  = document.getElementById("msg").value;
+    onFormFormat=()=>{
+        let nameVal  = document.getElementById("name").value;
+        let emailVal  = document.getElementById("email").value;
 
-        let jsonObjectData = {name:name,email:email,msg:msg }
+        if (nameVal.length > 0){
+            let nameValidation=/^([a-zA-Z ]){2,20}$/;
+            if(!nameValidation.test(nameVal)){
+                this.setState({nameEr:"Name Isn't Valid", errorIconName:"contactError"});
+            }else{
+                this.setState({nameEr:" ", errorIconName:"contactError d-none"});
+            }
+        }
+        if(emailVal.length > 0){
+            let mailValidation=/\S+@\S+\.\S+/;
+            if(!mailValidation.test(emailVal)){
+                this.setState({emailEr:"Mail Isn't Valid", errorIconEmail:"contactError"});
+            }else{
+                this.setState({emailEr:" ",  errorIconEmail:"contactError d-none"});
+            }
+        }
+
+    }
+
+
+    onFormControlSubmit=()=>{
+        let nameVal  = document.getElementById("name").value;
+        let emailVal  = document.getElementById("email").value;
+        let msgVal  = document.getElementById("msg").value;
+
+        let jsonObjectData = {name:nameVal,email:emailVal,msg:msgVal }
         let jsonListData = JSON.stringify(jsonObjectData);
 
-        RestGetClient.postRequest(AppUrl.Send, jsonListData).then(result=>{
-            alert("Success");
-        }).catch(error=>{
-            alert("Error");
-        })
+        if (nameVal.length==0 || emailVal.length==0 || msgVal.length==0){
+            toast.error('Field Should Not Be Empty ',{position: toast.POSITION.TOP_CENTER})
+        } else{
+
+            RestGetClient.postRequest(AppUrl.Send, jsonListData).then(result=>{
+                toast.success('Massage Send Successful ',{position: toast.POSITION.TOP_CENTER})
+
+            }).catch(error=>{
+                toast.error('Massage Send Fail ',{position: toast.POSITION.TOP_CENTER})
+
+            })
+
+        }
+
     }
+
+
 
     render() {
 
@@ -74,14 +119,18 @@ class ContactForm extends Component {
                                 <Form>
                                     <Form.Group>
                                         <Form.Label className="contactFormSubTitle" >Your Name</Form.Label>
-                                        <Form.Control id="name" type="text" placeholder="Your Name" />
-                                        <p className="errorIcon" >{this.state.name}</p>
+                                        <Form.Control onChange={this.onFormFormat} id="name" type="text" placeholder="Your Name" />
+                                        <p className="errorIcon" > <FontAwesomeIcon className={this.state.errorIconName} icon={faExclamationCircle}/>  {this.state.nameEr}</p>
+
+
+
                                     </Form.Group>
 
                                     <Form.Group>
                                         <Form.Label className="contactFormSubTitle" >Email Address</Form.Label>
-                                        <Form.Control id="email" type="email" placeholder="Your Email" />
-                                        <p className="errorIcon" >{this.state.email}</p>
+                                        <Form.Control onChange={this.onFormFormat} id="email" type="email" placeholder="Your Email" />
+                                        <p className="errorIcon" ><FontAwesomeIcon className={this.state.errorIconEmail} icon={faExclamationCircle}/>  {this.state.emailEr}</p>
+
                                     </Form.Group>
 
                                     <Form.Group>
@@ -90,9 +139,7 @@ class ContactForm extends Component {
                                         <p className="errorIcon" >{this.state.msg}</p>
                                     </Form.Group>
 
-                                    <Button onClick={this.onFormControlSubmit} variant="primary">
-                                        Send
-                                    </Button>
+                                    <Button id="submitButton" onClick={this.onFormControlSubmit} variant="primary">Send</Button>
                                 </Form>
                             </Col>
 
@@ -102,6 +149,9 @@ class ContactForm extends Component {
                                 <p className="contactFormDesc" ><FontAwesomeIcon icon={faEnvelope} /> {this.state.fMail}</p>
                                 <p className="contactFormDesc" ><FontAwesomeIcon icon={faPhone} /> {this.state.fMobile}</p>
                             </Col>
+
+
+                            <Toaster/>
 
                         </Row>
                     </Container>

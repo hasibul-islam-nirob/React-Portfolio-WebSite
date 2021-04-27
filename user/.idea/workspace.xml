@@ -44,6 +44,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/my-app/src/asset/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -99,6 +100,8 @@
       <workItem from="1618899833624" duration="9483000" />
       <workItem from="1619000588488" duration="4969000" />
       <workItem from="1619084159812" duration="4761000" />
+      <workItem from="1619371827628" duration="9633000" />
+      <workItem from="1619542078672" duration="4326000" />
     </task>
     <servers />
   </component>
