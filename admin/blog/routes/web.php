@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+//Routing For Contact
 Route::get('/getAll','ContactTableController@onSelectAll');
-
+Route::post('/contactDelete','ContactTableController@onContactDataDelete');
 
 
 

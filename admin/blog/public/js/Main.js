@@ -73126,8 +73126,11 @@ var ContactPage = /*#__PURE__*/function (_Component) {
     _this.state = {
       contactData: [],
       isLoading: true,
-      isError: false
+      isError: false,
+      rowDataId: "",
+      deleteBtnText: "Delete"
     };
+    _this.onDataDelete = _this.onDataDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -73156,8 +73159,71 @@ var ContactPage = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "onDataDelete",
+    value: function onDataDelete() {
+      var _this3 = this;
+
+      var permission = confirm("Do you want to delete this ?");
+
+      if (permission === true) {
+        this.setState({
+          deleteBtnText: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Spinner"], {
+            animation: "border",
+            as: "span",
+            size: "sm",
+            role: "status",
+            "aria-hidden": "true"
+          }), " Deleting...")
+        });
+        var rowId = this.state.rowDataId;
+        axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/contactDelete', {
+          id: rowId
+        }).then(function (response) {
+          if (response.status == 200 && response.data == 1) {
+            _this3.setState({
+              deleteBtnText: "Delete Success"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete"
+              });
+            }.bind(_this3), 3000);
+          } else {
+            _this3.setState({
+              deleteBtnText: "Delete Fail"
+            });
+
+            _this3.componentDidMount();
+
+            setTimeout(function () {
+              this.setState({
+                deleteBtnText: "Delete"
+              });
+            }.bind(_this3), 3000);
+          }
+        })["catch"](function (error) {
+          _this3.setState({
+            deleteBtnText: "Went Wrong"
+          });
+
+          _this3.componentDidMount();
+
+          setTimeout(function () {
+            this.setState({
+              deleteBtnText: "Delete"
+            });
+          }.bind(_this3), 3000);
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var allData = this.state.contactData;
       var columns = [{
         dataField: 'id',
@@ -73174,7 +73240,17 @@ var ContactPage = /*#__PURE__*/function (_Component) {
       }, {
         dataField: 'msg_time',
         text: 'Date & Time'
+      }, {
+        text: "Actions"
       }];
+      var selectRow = {
+        mode: "radio",
+        onSelect: function onSelect(row, isSelect, rowIndex, e) {
+          _this4.setState({
+            rowDataId: row['id']
+          });
+        }
+      };
 
       if (this.state.isLoading == true && this.state.isError == false) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingDiv__WEBPACK_IMPORTED_MODULE_6__["default"], null);
@@ -73187,11 +73263,17 @@ var ContactPage = /*#__PURE__*/function (_Component) {
           sm: 12,
           md: 12,
           lg: 12
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.onDataDelete,
+          className: "normal-btn btn p-2 mt-3"
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
           keyField: "id",
           data: allData,
           columns: columns,
-          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_4___default()()
+          pagination: react_bootstrap_table2_paginator__WEBPACK_IMPORTED_MODULE_4___default()({
+            nextPageText: "Next"
+          }),
+          selectRow: selectRow
         }))))))));
       }
     }
