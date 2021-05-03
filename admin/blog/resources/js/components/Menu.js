@@ -30,6 +30,7 @@ class Menu extends Component {
     render() {
         return (
             <Fragment>
+                <title>{this.props.title}</title>
                 <Navbar  expand="lg" className="fixed-top shadow-sm bg-white mb-5 py-3" variant="light" bg="white">
                     <Navbar.Brand onClick={this.showHideSideNav}  href="#"><FontAwesomeIcon icon={faBars} /></Navbar.Brand>
                     <b>ADMIN DASHBOARD</b>
@@ -42,7 +43,7 @@ class Menu extends Component {
                     <NavLink><Link className="my-0 p-2 text-white" to="/project"> <FontAwesomeIcon icon={faCode}/>      <span className={this.state.NavText} >Projects</span></Link> </NavLink>
                     <NavLink><Link className="my-0 p-2 text-white" to="/services"> <FontAwesomeIcon icon={faFolder}/>    <span className={this.state.NavText} >Services</span></Link> </NavLink>
                     <NavLink><Link className="my-0 p-2 text-white" to="/reviews"> <FontAwesomeIcon icon={faComment}/>   <span className={this.state.NavText} >Review</span></Link> </NavLink>
-                    <a className=" ml-3 NavItem p-2" href="/Logout"> <FontAwesomeIcon  icon={faPowerOff} /> <span className={this.state.NavText} >Sign Out</span></a>
+                    <a className=" ml-3 NavItem p-2" href="/logout"> <FontAwesomeIcon  icon={faPowerOff} /> <span className={this.state.NavText} >Sign Out</span></a>
                 </div>
 
                 <div onClick={this.showHideSideNav} className={this.state.mainDivOverlay}>

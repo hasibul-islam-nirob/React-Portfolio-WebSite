@@ -6,13 +6,15 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import Axios from "axios";
 import LoadingDiv from "../components/LoadingDiv";
 import WentWrong from "../components/WentWrong";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 class ContactPage extends Component {
 
     constructor() {
         super();
         this.state= {
-            contactData: [],
+            allData: [],
             isLoading:true,
             isError:false,
             rowDataId:"",
@@ -24,7 +26,7 @@ class ContactPage extends Component {
     componentDidMount() {
         Axios.get('/getAll').then((response)=>{
             if (response.status==200){
-                this.setState({contactData:response.data,isLoading:false });
+                this.setState({allData:response.data,isLoading:false });
             }else{
                 this.setState({isLoading:false, isError:true });
             }
@@ -41,6 +43,15 @@ class ContactPage extends Component {
             let rowId = this.state.rowDataId;
             Axios.post('/contactDelete', {id:rowId}).then((response)=>{
                 if (response.status==200 && response.data==1 ){
+                    toast.success('Delete Success', {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: 0,
+                    });
                     this.setState({deleteBtnText:"Delete Success"});
                     this.componentDidMount();
                     setTimeout(function (){
@@ -48,6 +59,15 @@ class ContactPage extends Component {
                     }.bind(this),3000);
                 }else{
                     this.setState({deleteBtnText:"Delete Fail"});
+                    toast.error('Delete Fail', {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: 0,
+                    });
                     this.componentDidMount();
                     setTimeout(function (){
                         this.setState({deleteBtnText:"Delete"});
@@ -55,6 +75,15 @@ class ContactPage extends Component {
                 }
             }).catch((error)=>{
                 this.setState({deleteBtnText:"Went Wrong"});
+                toast.error('Delete Fail', {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: 0,
+                });
                 this.componentDidMount();
                 setTimeout(function (){
                     this.setState({deleteBtnText:"Delete"});
@@ -66,7 +95,7 @@ class ContactPage extends Component {
     }
 
     render() {
-        const allData = this.state.contactData;
+        const allData = this.state.allData;
         const columns = [
             {dataField:'id', text:'Id'},
             {dataField:'person_name', text:'Name'},
@@ -89,7 +118,7 @@ class ContactPage extends Component {
         }else{
             return (
                 <Fragment>
-                    <Menu>
+                    <Menu  title="Contact" >
                         <Container fluid={true} >
                             <Row>
                                 <Col sm={12} md={12} lg={12} >
@@ -108,6 +137,17 @@ class ContactPage extends Component {
                                     </Card>
                                 </Col>
                             </Row>
+                            <ToastContainer
+                                position="bottom-center"
+                                autoClose={3000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss={false}
+                                draggable
+                                pauseOnHover={false}
+                            />
                         </Container>
                     </Menu>
                 </Fragment>
