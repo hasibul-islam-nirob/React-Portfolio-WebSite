@@ -53,7 +53,7 @@ a:hover{
     border-radius: 0% !important;
     box-shadow: 0 0 6px 0 rgba(240, 240, 240,1);
 }
-.card:hover{
+.cardHome:hover{
     border: none !important;
     box-shadow: 0 0 10px 0 rgba(49, 133, 255,0.5);
 }

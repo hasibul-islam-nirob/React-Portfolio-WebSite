@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import Menu from "../components/Menu";
-import {Button, Col, Container, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Container, Form, Modal, Row, Spinner} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import Axios from "axios";
@@ -17,10 +17,52 @@ class ReviewsPage extends Component {
             isLoading:true,
             isError:false,
             rowDataId:"",
-            deleteBtnText:"Delete"
+            deleteBtnText:"Delete",
+            addNewModal:false,
+            clientName:"",
+            clientDesc:"",
+            clientImg:""
         }
         this.onDataDelete = this.onDataDelete.bind(this);
         this.imgFormatting = this.imgFormatting.bind(this);
+
+        this.addNewModalOpen = this.addNewModalOpen.bind(this);
+        this.addNewModalClose = this.addNewModalClose.bind(this);
+
+        this.onClientName = this.onClientName.bind(this);
+        this.onClientDecs = this.onClientDecs.bind(this);
+        this.onClientImg = this.onClientImg.bind(this);
+
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
+    addNewModalOpen(){
+        this.setState({addNewModal:true});
+    }
+    addNewModalClose(){
+        this.setState({addNewModal:false});
+    }
+
+    onClientName(event){
+        let name = event.target.value;
+        this.setState({clientName:name});
+    }
+    onClientDecs(event){
+        let desc = event.target.value;
+        this.setState({clientDesc:desc});
+    }
+    onClientImg(event){
+        let img = event.target.value;
+        let fileName = img.fileName;
+        this.setState({clientImg:fileName});
+    }
+
+    onFormSubmit(){
+        let name = this.state.clientName;
+        let desc = this.state.clientDesc;
+        let img  = this.state.clientImg;
+        alert(img)
+
     }
 
     componentDidMount() {
@@ -80,7 +122,6 @@ class ReviewsPage extends Component {
             })
         }
 
-
     }
 
 
@@ -115,6 +156,7 @@ class ReviewsPage extends Component {
                             <Row>
                                 <Col sm={12} lg={12} md={12} >
                                     <Button onClick={this.onDataDelete} className="normal-btn btn p-2 mt-3" >{this.state.deleteBtnText}</Button>
+                                    <Button onClick={this.addNewModalOpen} className="normal-btn btn p-2 mt-3" >Add Review</Button>
                                     <BootstrapTable
                                         keyField='id'
                                         data={ data }
@@ -137,6 +179,36 @@ class ReviewsPage extends Component {
                             />
                         </Container>
                     </Menu>
+
+                    <Modal show={this.state.addNewModal} onHide={this.addNewModalClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add New Reviews</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>Client Name</Form.Label>
+                                    <Form.Control onChange={this.onClientName} id="clientName" type="text" placeholder="Enter Client Name" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Client Desc</Form.Label>
+                                    <Form.Control id="clientDesc" type="text" placeholder="Enter Client Say" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Client Image</Form.Label>
+                                    <Form.Control id="clientImg" type="file" placeholder="" />
+                                </Form.Group>
+                                <Button onClick={this.onFormSubmit} variant="primary">Submit</Button>
+                            </Form>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="danger" onClick={this.addNewModalClose}>
+                                Cancel
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Fragment>
             );
         }

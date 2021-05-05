@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import Menu from "../components/Menu";
-import {Button, Card, Col, Container, Row, Spinner} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Modal, Row, Spinner} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import Axios from "axios";
@@ -18,10 +18,21 @@ class CoursePage extends Component {
             isLoading:true,
             isError:false,
             rowDataId:"",
-            deleteBtnText:"Delete"
+            deleteBtnText:"Delete",
+            addNewModal:false
         }
         this.onDataDelete = this.onDataDelete.bind(this);
         this.imgFormatting = this.imgFormatting.bind(this);
+
+        this.addNewModalOpen = this.addNewModalOpen.bind(this);
+        this.addNewModalClose = this.addNewModalClose.bind(this);
+    }
+
+    addNewModalOpen(){
+        this.setState({addNewModal:true});
+    }
+    addNewModalClose(){
+        this.setState({addNewModal:false});
     }
 
     componentDidMount() {
@@ -126,6 +137,7 @@ class CoursePage extends Component {
                             <Row>
                                 <Col sm={12} md={12} lg={12} >
                                     <Button onClick={this.onDataDelete} className="normal-btn btn p-2 mt-3" >{this.state.deleteBtnText}</Button>
+                                    <Button onClick={this.addNewModalOpen} className="normal-btn btn p-2 mt-3" >Add Course</Button>
                                     <Card>
                                         <Card.Body>
                                             <BootstrapTable
@@ -153,6 +165,38 @@ class CoursePage extends Component {
                             />
                         </Container>
                     </Menu>
+
+                    <Modal show={this.state.addNewModal} onHide={this.addNewModalClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add New Course</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>Course Name</Form.Label>
+                                    <Form.Control id="" type="text" placeholder="Enter Client Name" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Course Title</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Client Say" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Courses Image</Form.Label>
+                                    <Form.Control type="file" placeholder="" />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                            </Form>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={this.addNewModalClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Fragment>
 
             );

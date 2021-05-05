@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -30,12 +36,10 @@
         let password = document.getElementById('password').value;
 
         let xmlHttp = new XMLHttpRequest();
-
         xmlHttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
                 if (this.responseText == "1"){
                     window.location.href = "/";
-                    alert("Login Success");
                 }else{
                     alert("Login Fail");
                 }
@@ -47,7 +51,10 @@
     }
 
 </script>
-
+<script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
 
 
 </body>

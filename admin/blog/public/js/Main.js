@@ -75422,14 +75422,31 @@ var CoursePage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: "",
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      addNewModal: false
     };
     _this.onDataDelete = _this.onDataDelete.bind(_assertThisInitialized(_this));
     _this.imgFormatting = _this.imgFormatting.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(CoursePage, [{
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        addNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        addNewModal: false
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -75602,7 +75619,10 @@ var CoursePage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
           onClick: this.onDataDelete,
           className: "normal-btn btn p-2 mt-3"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn btn p-2 mt-3"
+        }, "Add Course"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
           keyField: "id",
           data: allData,
           columns: columns,
@@ -75620,7 +75640,28 @@ var CoursePage = /*#__PURE__*/function (_Component) {
           pauseOnFocusLoss: false,
           draggable: true,
           pauseOnHover: false
-        }))));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+          show: this.state.addNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Add New Course")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Course Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          id: "",
+          type: "text",
+          placeholder: "Enter Client Name"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Course Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "text",
+          placeholder: "Enter Client Say"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Courses Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "file",
+          placeholder: ""
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          type: "submit"
+        }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          onClick: this.addNewModalClose
+        }, "Close"))));
       }
     }
   }]);
@@ -75740,7 +75781,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
           log: 3,
           sm: 6
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-          className: "card"
+          className: "cardHome"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
           className: "title-text"
         }, data['Contact']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -75751,7 +75792,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
           log: 3,
           sm: 6
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-          className: "card"
+          className: "cardHome"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
           className: "title-text"
         }, data['Course']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -75762,7 +75803,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
           log: 3,
           sm: 6
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-          className: "card"
+          className: "cardHome"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
           className: "title-text"
         }, data['Project']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -75773,7 +75814,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
           log: 3,
           sm: 6
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-          className: "card"
+          className: "cardHome"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
           className: "title-text"
         }, data['clientReview']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -75784,7 +75825,7 @@ var HomePage = /*#__PURE__*/function (_Component) {
           log: 3,
           sm: 6
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-          className: "card"
+          className: "cardHome"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
           className: "title-text"
         }, data['Services']), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -75874,14 +75915,31 @@ var ProjectPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: "",
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      addNewModal: false
     };
     _this.onDataDelete = _this.onDataDelete.bind(_assertThisInitialized(_this));
     _this.imgFormatting = _this.imgFormatting.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ProjectPage, [{
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        addNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        addNewModal: false
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -76051,7 +76109,10 @@ var ProjectPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
           onClick: this.onDataDelete,
           className: "normal-btn btn p-2 mt-3"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn btn p-2 mt-3"
+        }, "Add Project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
           keyField: "id",
           data: allData,
           columns: columns,
@@ -76069,7 +76130,27 @@ var ProjectPage = /*#__PURE__*/function (_Component) {
           pauseOnFocusLoss: false,
           draggable: true,
           pauseOnHover: false
-        }))));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+          show: this.state.addNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Add New Project")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Project Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "text",
+          placeholder: "Enter Client Name"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Project Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "text",
+          placeholder: "Enter Client Say"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Project Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "file",
+          placeholder: ""
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          type: "submit"
+        }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          onClick: this.addNewModalClose
+        }, "Close"))));
       }
     }
   }]);
@@ -76154,14 +76235,71 @@ var ReviewsPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: "",
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      addNewModal: false,
+      clientName: "",
+      clientDesc: "",
+      clientImg: ""
     };
     _this.onDataDelete = _this.onDataDelete.bind(_assertThisInitialized(_this));
     _this.imgFormatting = _this.imgFormatting.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
+    _this.onClientName = _this.onClientName.bind(_assertThisInitialized(_this));
+    _this.onClientDecs = _this.onClientDecs.bind(_assertThisInitialized(_this));
+    _this.onClientImg = _this.onClientImg.bind(_assertThisInitialized(_this));
+    _this.onFormSubmit = _this.onFormSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ReviewsPage, [{
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        addNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        addNewModal: false
+      });
+    }
+  }, {
+    key: "onClientName",
+    value: function onClientName(event) {
+      var name = event.target.value;
+      this.setState({
+        clientName: name
+      });
+    }
+  }, {
+    key: "onClientDecs",
+    value: function onClientDecs(event) {
+      var desc = event.target.value;
+      this.setState({
+        clientDesc: desc
+      });
+    }
+  }, {
+    key: "onClientImg",
+    value: function onClientImg(event) {
+      var img = event.target.value;
+      var fileName = img.fileName;
+      this.setState({
+        clientImg: fileName
+      });
+    }
+  }, {
+    key: "onFormSubmit",
+    value: function onFormSubmit() {
+      var name = this.state.clientName;
+      var desc = this.state.clientDesc;
+      var img = this.state.clientImg;
+      alert(img);
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -76307,7 +76445,10 @@ var ReviewsPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
           onClick: this.onDataDelete,
           className: "normal-btn btn p-2 mt-3"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn btn p-2 mt-3"
+        }, "Add Review"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
           keyField: "id",
           data: data,
           columns: columns,
@@ -76325,7 +76466,31 @@ var ReviewsPage = /*#__PURE__*/function (_Component) {
           pauseOnFocusLoss: false,
           draggable: true,
           pauseOnHover: false
-        }))));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+          show: this.state.addNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Add New Reviews")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Client Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          onChange: this.onClientName,
+          id: "clientName",
+          type: "text",
+          placeholder: "Enter Client Name"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Client Desc"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          id: "clientDesc",
+          type: "text",
+          placeholder: "Enter Client Say"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Client Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          id: "clientImg",
+          type: "file",
+          placeholder: ""
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.onFormSubmit,
+          variant: "primary"
+        }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "danger",
+          onClick: this.addNewModalClose
+        }, "Cancel"))));
       }
     }
   }]);
@@ -76410,14 +76575,31 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
       isLoading: true,
       isError: false,
       rowDataId: "",
-      deleteBtnText: "Delete"
+      deleteBtnText: "Delete",
+      addNewModal: false
     };
     _this.onDataDelete = _this.onDataDelete.bind(_assertThisInitialized(_this));
     _this.imgFormatting = _this.imgFormatting.bind(_assertThisInitialized(_this));
+    _this.addNewModalOpen = _this.addNewModalOpen.bind(_assertThisInitialized(_this));
+    _this.addNewModalClose = _this.addNewModalClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ServicesPage, [{
+    key: "addNewModalOpen",
+    value: function addNewModalOpen() {
+      this.setState({
+        addNewModal: true
+      });
+    }
+  }, {
+    key: "addNewModalClose",
+    value: function addNewModalClose() {
+      this.setState({
+        addNewModal: false
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -76587,7 +76769,10 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
           onClick: this.onDataDelete,
           className: "normal-btn btn p-2 mt-3"
-        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, this.state.deleteBtnText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          onClick: this.addNewModalOpen,
+          className: "normal-btn btn p-2 mt-3"
+        }, "Add Services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_table_next__WEBPACK_IMPORTED_MODULE_3___default.a, {
           keyField: "id",
           data: allData,
           columns: columns,
@@ -76605,7 +76790,27 @@ var ServicesPage = /*#__PURE__*/function (_Component) {
           pauseOnFocusLoss: false,
           draggable: true,
           pauseOnHover: false
-        }))));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+          show: this.state.addNewModal,
+          onHide: this.addNewModalClose
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Header, {
+          closeButton: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Title, null, "Add New Services")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Services Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "text",
+          placeholder: "Enter Client Name"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Services Desc"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "text",
+          placeholder: "Enter Client Say"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, "Services Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+          type: "file",
+          placeholder: ""
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          type: "submit"
+        }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          variant: "primary",
+          onClick: this.addNewModalClose
+        }, "Close"))));
       }
     }
   }]);

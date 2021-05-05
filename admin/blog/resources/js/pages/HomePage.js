@@ -41,7 +41,7 @@ class HomePage extends Component {
                         <Container fluid={true}>
                             <Row>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card">
+                                    <Card className="cardHome">
                                         <Card.Body>
                                             <h5 className="title-text">{data['Contact']}</h5>
                                             <h5 className="des-text">Contact Request</h5>
@@ -49,7 +49,7 @@ class HomePage extends Component {
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card">
+                                    <Card className="cardHome">
                                         <Card.Body>
                                             <h5 className="title-text">{data['Course']}</h5>
                                             <h5 className="des-text">Total Courses</h5>
@@ -57,7 +57,7 @@ class HomePage extends Component {
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card">
+                                    <Card className="cardHome">
                                         <Card.Body>
                                             <h5 className="title-text">{data['Project']}</h5>
                                             <h5 className="des-text">Total Projects</h5>
@@ -65,7 +65,7 @@ class HomePage extends Component {
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card">
+                                    <Card className="cardHome">
                                         <Card.Body>
                                             <h5 className="title-text">{data['clientReview']}</h5>
                                             <h5 className="des-text">Total Review</h5>
@@ -73,7 +73,7 @@ class HomePage extends Component {
                                     </Card>
                                 </Col>
                                 <Col className="p-2" md={3} log={3} sm={6}>
-                                    <Card className="card">
+                                    <Card className="cardHome">
                                         <Card.Body>
                                             <h5 className="title-text">{data['Services']}</h5>
                                             <h5 className="des-text">Total Services</h5>
